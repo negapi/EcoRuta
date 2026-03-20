@@ -1,0 +1,15 @@
+<header>
+  <h1>{{ title() }}</h1>
+  <nav>
+    <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a> |
+    <a routerLink="/catalogo" routerLinkActive="active">Catálogo de Rutas</a>
+  </nav>
+</header>
+
+<main>
+  <router-outlet></router-outlet>
+</main>
+
+<footer>
+  <p>&copy; 2024 EcoRuta - Promoviendo el turismo ecológico en Honduras</p>
+</footer>

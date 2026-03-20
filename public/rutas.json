@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "nombre": "Sendero La Tigra",
+    "ubicación": "Parque Nacional La Tigra, Francisco Morazán",
+    "dificultad": "Media",
+    "precio": 150,
+    "duracion": "4 horas",
+    "tipo": "Senderismo",
+    "popularidad": 95,
+    "imagen": "https://placehold.co/600x400?text=La+Tigra",
+    "descripcion": "Ruta a través del bosque nublado con gran biodiversidad."
+  },
+  {
+    "id": 2,
+    "nombre": "Cascada Pulhapanzak",
+    "ubicación": "Cortés",
+    "dificultad": "Baja",
+    "precio": 100,
+    "duracion": "2 horas",
+    "tipo": "Recreativa",
+    "popularidad": 98,
+    "imagen": "https://placehold.co/600x400?text=Pulhapanzak",
+    "descripcion": "Visita a la impresionante catarata con opciones de canopy."
+  },
+  {
+    "id": 3,
+    "nombre": "Ciclismo en Montaña de Santa Bárbara",
+    "ubicación": "Santa Bárbara",
+    "dificultad": "Alta",
+    "precio": 500,
+    "duracion": "6 horas",
+    "tipo": "Ciclismo",
+    "popularidad": 80,
+    "imagen": "https://placehold.co/600x400?text=Santa+Barbara",
+    "descripcion": "Ruta exigente para ciclistas experimentados."
+  },
+  {
+    "id": 4,
+    "nombre": "Kayak en Lago de Yojoa",
+    "ubicación": "Lago de Yojoa",
+    "dificultad": "Baja",
+    "precio": 250,
+    "duracion": "3 horas",
+    "tipo": "Kayak",
+    "popularidad": 90,
+    "imagen": "https://placehold.co/600x400?text=Yojoa",
+    "descripcion": "Recorrido tranquilo por el lago más grande de Honduras."
+  },
+  {
+    "id": 5,
+    "nombre": "Camping en Celaque",
+    "ubicación": "Lempira",
+    "dificultad": "Alta",
+    "precio": 300,
+    "duracion": "2 días",
+    "tipo": "Acampada",
+    "popularidad": 85,
+    "imagen": "https://placehold.co/600x400?text=Celaque",
+    "descripcion": "Ascenso al punto más alto de Honduras con pernocta."
+  }
+]
