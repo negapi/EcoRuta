@@ -1,0 +1,51 @@
+<section class="container py-4">
+  <h2 class="mb-4 text-primary">Catálogo de Rutas</h2>
+
+  <div class="row g-3 mb-4 p-3 bg-light border rounded">
+    <div class="col-md-3">
+      <label class="form-label">Búsqueda:</label>
+      <input type="text" class="form-control" [ngModel]="filtroNombre()" (ngModelChange)="filtroNombre.set($event)" placeholder="Buscar por nombre...">
+    </div>
+
+    <div class="col-md-2">
+      <label class="form-label">Dificultad:</label>
+      <select class="form-select" [ngModel]="filtroDificultad()" (ngModelChange)="filtroDificultad.set($event)">
+        <option value="">Todas</option>
+        <option value="Baja">Baja</option>
+        <option value="Media">Media</option>
+        <option value="Alta">Alta</option>
+      </select>
+    </div>
+
+    <div class="col-md-3">
+      <label class="form-label">Precio Máximo: L. {{filtroPrecio()}}</label>
+      <input type="range" class="form-range" min="0" max="1000" step="50" [ngModel]="filtroPrecio()" (ngModelChange)="filtroPrecio.set(+$event)">
+    </div>
+
+    <div class="col-md-2">
+      <label class="form-label">Actividad:</label>
+      <select class="form-select" [ngModel]="filtroTipo()" (ngModelChange)="filtroTipo.set($event)">
+        <option value="">Todas</option>
+        <option value="Senderismo">Senderismo</option>
+        <option value="Recreativa">Recreativa</option>
+        <option value="Ciclismo">Ciclismo</option>
+        <option value="Kayak">Kayak</option>
+        <option value="Acampada">Acampada</option>
+      </select>
+    </div>
+  </div>
+
+  @if (rutasFiltradas().length > 0) {
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      @for (ruta of rutasFiltradas(); track ruta.id) {
+        <div class="col">
+          <app-ruta-card [ruta]="ruta"></app-ruta-card>
+        </div>
+      }
+    </div>
+  } @else {
+    <div class="alert alert-warning mt-4" role="alert">
+      No se encontraron rutas con los filtros seleccionados.
+    </div>
+  }
+</section>
