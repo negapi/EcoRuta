@@ -1,15 +1,25 @@
-<header>
-  <h1>{{ title() }}</h1>
-  <nav>
-    <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a> |
-    <a routerLink="/catalogo" routerLinkActive="active">Catálogo de Rutas</a>
-  </nav>
+<header class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">{{ title() }}</a>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/catalogo" routerLinkActive="active">Catálogo de Rutas</a>
+        </li>
+      </ul>
+    </div>
+  </div>
 </header>
 
-<main>
+<main class="container mt-4">
   <router-outlet></router-outlet>
 </main>
 
-<footer>
-  <p>&copy; 2024 EcoRuta - Promoviendo el turismo ecológico en Honduras</p>
+<footer class="mt-4 py-3 bg-light border-top">
+  <div class="container text-center text-muted">
+    <p>&copy; 2026 EcoRuta - Promoviendo el turismo ecológico en Honduras</p>
+  </div>
 </footer>

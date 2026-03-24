@@ -7,41 +7,72 @@ import { EcoService, Ruta } from '../eco.service';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <section>
-      <h2>Dashboard EcoRuta</h2>
+    <section class="container py-4">
+      <h2 class="mb-4 text-primary">Dashboard EcoRuta</h2>
 
-      <div>
-        <article>
-          <h3>Total de Rutas</h3>
-          <p>{{totalRutas()}}</p>
-        </article>
+      <div class="row g-4 mb-5">
+        <div class="col-md-4">
+          <article class="card bg-primary text-white h-100 shadow">
+            <div class="card-body text-center">
+              <h3 class="card-title h5">Total de Rutas</h3>
+              <p class="display-4 fw-bold mb-0">{{totalRutas()}}</p>
+            </div>
+          </article>
+        </div>
 
-        <article>
-          <h3>Dificultad Promedio</h3>
-          <p>{{dificultadPromedio()}}</p>
-        </article>
+        <div class="col-md-4">
+          <article class="card bg-success text-white h-100 shadow">
+            <div class="card-body text-center">
+              <h3 class="card-title h5">Dificultad Promedio</h3>
+              <p class="display-4 fw-bold mb-0">{{dificultadPromedio()}}</p>
+            </div>
+          </article>
+        </div>
 
-        <article>
-          <h3>Ruta Más Popular</h3>
-          <p>{{rutaMasPopular()?.nombre}} ({{rutaMasPopular()?.popularidad}}%)</p>
-        </article>
+        <div class="col-md-4">
+          <article class="card bg-info text-white h-100 shadow">
+            <div class="card-body text-center">
+              <h3 class="card-title h5">Ruta Más Popular</h3>
+              <p class="h4 mb-1">{{rutaMasPopular().nombre}}</p>
+              <div class="progress mt-2" style="height: 10px;">
+                <div class="progress-bar bg-warning" role="progressbar" [style.width.%]="rutaMasPopular()?.popularidad"></div>
+              </div>
+              <small class="d-block mt-1">{{rutaMasPopular().popularidad}}% popularidad</small>
+            </div>
+          </article>
+        </div>
       </div>
 
-      <div>
-        <h3>Rutas por Región</h3>
-        <ul>
-          <li *ngFor="let region of rutasPorRegion() | keyvalue">
-            {{region.key}}: {{region.value}} actividades
-          </li>
-        </ul>
-      </div>
+      <div class="row g-4">
+        <div class="col-md-6">
+          <div class="card h-100 shadow-sm">
+            <div class="card-header bg-dark text-white">
+              <h3 class="card-title h5 mb-0">Rutas por Región</h3>
+            </div>
+            <div class="card-body p-0">
+              <ul class="list-group list-group-flush">
+                <li *ngFor="let region of rutasPorRegion() | keyvalue" class="list-group-item d-flex justify-content-between align-items-center">
+                  {{region.key}}
+                  <span class="badge bg-primary rounded-pill">{{region.value}} actividades</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
 
-      <div>
-        <h3>Recomendaciones para ti</h3>
-        <p>Explora nuestras actividades más destacadas basadas en la preferencia de la comunidad.</p>
-        <div *ngFor="let ruta of recomendaciones()">
-          <h4>{{ruta.nombre}}</h4>
-          <p>{{ruta.tipo}} - {{ruta.ubicacion}}</p>
+        <div class="col-md-6">
+          <div class="card h-100 shadow-sm border-warning">
+            <div class="card-header bg-warning text-dark">
+              <h3 class="card-title h5 mb-0">Recomendaciones para ti</h3>
+            </div>
+            <div class="card-body">
+              <p class="card-text text-muted mb-3">Explora nuestras actividades más destacadas basadas en la preferencia de la comunidad.</p>
+              <div *ngFor="let ruta of recomendaciones()" class="mb-3 p-2 border-start border-4 border-warning bg-light">
+                <h4 class="h6 fw-bold mb-1">{{ruta.nombre}}</h4>
+                <p class="small mb-0 text-secondary">{{ruta.tipo}} - {{ruta.ubicacion}}</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
