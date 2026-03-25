@@ -1,12 +1,16 @@
-import { Component, input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Ruta } from '../../eco.service';
 
 @Component({
   selector: 'app-ruta-card',
   standalone: true,
-  imports: [],
   templateUrl: './ruta-card.component.html'
 })
 export class RutaCardComponent {
-  ruta = input.required<Ruta>();
+  @Input() ruta!: Ruta;
+  @Input() isAdmin = false;
+  @Input() isLoggedIn = false;
+  @Input() isFavorito = false;
+  @Output() onDelete = new EventEmitter<number>();
+  @Output() onFavorito = new EventEmitter<number>();
 }

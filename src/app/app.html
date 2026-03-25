@@ -28,11 +28,7 @@
     <div class="modal-box">
       <button class="modal-close" (click)="showLogin.set(false)">&times;</button>
       <h2>Bienvenido</h2>
-      <p class="modal-sub">Accede a tu cuenta para explorar rutas.</p>
-      <div class="modal-tabs">
-        <button class="modal-tab" [class.active]="loginTab() === 'user'" (click)="loginTab.set('user')">Usuario</button>
-        <button class="modal-tab" [class.active]="loginTab() === 'admin'" (click)="loginTab.set('admin')">Administrador</button>
-      </div>
+      <p class="modal-sub">Accede a tu cuenta para explorar las rutas.</p>
       <label>Correo electrónico</label>
       <input type="email" [ngModel]="loginEmail()" (ngModelChange)="loginEmail.set($event)"
         placeholder="correo@ejemplo.com" />
@@ -42,9 +38,7 @@
       @if (loginError()) {
         <p class="login-error">{{ loginError() }}</p>
       }
-      <button class="btn-submit" (click)="submitLogin()">
-        {{ loginTab() === 'admin' ? 'Entrar como Admin' : 'Iniciar Sesión' }}
-      </button>
+      <button class="btn-submit" (click)="submitLogin()">Iniciar Sesión</button>
     </div>
   </div>
 }
