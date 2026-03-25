@@ -1,37 +1,52 @@
-<section class="container py-4">
-  <h2 class="mb-4 text-primary">Catálogo de Rutas</h2>
+<section>
+  <h2 class="section-heading">Rutas Disponibles</h2>
 
-  <div class="row g-3 mb-4 p-3 bg-light border rounded">
-    <div class="col-md-3">
-      <label class="form-label">Búsqueda:</label>
-      <input type="text" class="form-control" [ngModel]="filtroNombre()" (ngModelChange)="filtroNombre.set($event)" placeholder="Buscar por nombre...">
+  @if (auth.isAdmin()) {
+    <div class="admin-toolbar">
+      <button class="btn-admin add" (click)="showAddModal.set(true)">+ Agregar Ruta</button>
     </div>
+  }
 
-    <div class="col-md-2">
-      <label class="form-label">Dificultad:</label>
-      <select class="form-select" [ngModel]="filtroDificultad()" (ngModelChange)="filtroDificultad.set($event)">
-        <option value="">Todas</option>
-        <option value="Baja">Baja</option>
-        <option value="Media">Media</option>
-        <option value="Alta">Alta</option>
-      </select>
-    </div>
+  @if (auth.isLoggedIn() && !auth.isAdmin()) {
+    <button class="fav-filter" [class.active]="soloFavoritos()" (click)="soloFavoritos.set(!soloFavoritos())">
+      {{ soloFavoritos() ? '★' : '☆' }} Mostrar solo favoritos
+    </button>
+  }
 
-    <div class="col-md-3">
-      <label class="form-label">Precio Máximo: L. {{filtroPrecio()}}</label>
-      <input type="range" class="form-range" min="0" max="1000" step="50" [ngModel]="filtroPrecio()" (ngModelChange)="filtroPrecio.set(+$event)">
-    </div>
-
-    <div class="col-md-2">
-      <label class="form-label">Actividad:</label>
-      <select class="form-select" [ngModel]="filtroTipo()" (ngModelChange)="filtroTipo.set($event)">
-        <option value="">Todas</option>
-        <option value="Senderismo">Senderismo</option>
-        <option value="Recreativa">Recreativa</option>
-        <option value="Ciclismo">Ciclismo</option>
-        <option value="Kayak">Kayak</option>
-        <option value="Acampada">Acampada</option>
-      </select>
+  <div class="filter-bar">
+    <div class="row g-3 align-items-end">
+      <div class="col-md-4">
+        <label>Buscar ruta</label>
+        <input type="text" class="form-control" [ngModel]="filtroNombre()"
+          (ngModelChange)="filtroNombre.set($event)" placeholder="Nombre de la ruta...">
+      </div>
+      <div class="col-md-2">
+        <label>Dificultad</label>
+        <select class="form-select" [ngModel]="filtroDificultad()"
+          (ngModelChange)="filtroDificultad.set($event)">
+          <option value="">Todas</option>
+          <option value="Baja">Baja</option>
+          <option value="Media">Media</option>
+          <option value="Alta">Alta</option>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <label>Precio máximo: L. {{ filtroPrecio() }}</label>
+        <input type="range" class="form-range" min="0" max="1000" step="50"
+          [ngModel]="filtroPrecio()" (ngModelChange)="filtroPrecio.set(+$event)">
+      </div>
+      <div class="col-md-3">
+        <label>Actividad</label>
+        <select class="form-select" [ngModel]="filtroTipo()"
+          (ngModelChange)="filtroTipo.set($event)">
+          <option value="">Todas</option>
+          <option value="Senderismo">Senderismo</option>
+          <option value="Recreativa">Recreativa</option>
+          <option value="Ciclismo">Ciclismo</option>
+          <option value="Kayak">Kayak</option>
+          <option value="Acampada">Acampada</option>
+        </select>
+      </div>
     </div>
   </div>
 
@@ -39,13 +54,69 @@
     <div class="row row-cols-1 row-cols-md-3 g-4">
       @for (ruta of rutasFiltradas(); track ruta.id) {
         <div class="col">
-          <app-ruta-card [ruta]="ruta"></app-ruta-card>
+          <app-ruta-card
+            [ruta]="ruta"
+            [isAdmin]="auth.isAdmin()"
+            [isLoggedIn]="auth.isLoggedIn()"
+            [isFavorito]="auth.isFavorito(ruta.id)"
+            (onDelete)="deleteRuta($event)"
+            (onFavorito)="auth.toggleFavorito($event)">
+          </app-ruta-card>
         </div>
       }
     </div>
   } @else {
-    <div class="alert alert-warning mt-4" role="alert">
-      No se encontraron rutas con los filtros seleccionados.
+    <div class="no-results">
+      <p>🌿 No se encontraron rutas con los filtros seleccionados.</p>
     </div>
   }
 </section>
+
+@if (showAddModal()) {
+  <div class="modal-overlay" (click)="$event.target === $event.currentTarget && showAddModal.set(false)">
+    <div class="modal-box wide">
+      <button class="modal-close" (click)="showAddModal.set(false)">&times;</button>
+      <h2>Nueva Ruta</h2>
+      <p class="modal-sub">Completa los datos para agregar una ruta al catálogo.</p>
+      <label>Nombre</label>
+      <input type="text" [ngModel]="newNombre()" (ngModelChange)="newNombre.set($event)" placeholder="Nombre de la ruta" />
+      <label>Ubicación</label>
+      <input type="text" [ngModel]="newUbicacion()" (ngModelChange)="newUbicacion.set($event)" placeholder="Ej: Lago de Yojoa, Cortés" />
+      <div class="form-row">
+        <div>
+          <label>Dificultad</label>
+          <select [ngModel]="newDificultad()" (ngModelChange)="newDificultad.set($event)">
+            <option value="Baja">Baja</option>
+            <option value="Media">Media</option>
+            <option value="Alta">Alta</option>
+          </select>
+        </div>
+        <div>
+          <label>Tipo</label>
+          <select [ngModel]="newTipo()" (ngModelChange)="newTipo.set($event)">
+            <option value="Senderismo">Senderismo</option>
+            <option value="Recreativa">Recreativa</option>
+            <option value="Ciclismo">Ciclismo</option>
+            <option value="Kayak">Kayak</option>
+            <option value="Acampada">Acampada</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div>
+          <label>Precio (L.)</label>
+          <input type="number" [ngModel]="newPrecio()" (ngModelChange)="newPrecio.set(+$event)" placeholder="100" />
+        </div>
+        <div>
+          <label>Duración</label>
+          <input type="text" [ngModel]="newDuracion()" (ngModelChange)="newDuracion.set($event)" placeholder="Ej: 3 horas" />
+        </div>
+      </div>
+      <label>URL de imagen</label>
+       <input type="text" [ngModel]="newImagen()" (ngModelChange)="newImagen.set($event)" placeholder="https://ejemplo.com/imagen.jpg" />
+      <label>Descripción</label>
+      <textarea [ngModel]="newDescripcion()" (ngModelChange)="newDescripcion.set($event)" placeholder="Breve descripción de la ruta..."></textarea>
+      <button class="btn-submit" (click)="submitAddRuta()">Guardar Ruta</button>
+    </div>
+  </div>
+}

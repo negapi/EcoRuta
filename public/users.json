@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "nombre": "Admin",
+    "email": "admin@ecoruta.hn",
+    "password": "admin123",
+    "isAdmin": true,
+    "favoritos": []
+  },
+  {
+    "id": 2,
+    "nombre": "Edwin",
+    "email": "edwin@ecoruta.hn",
+    "password": "edwin123",
+    "isAdmin": false,
+    "favoritos": []
+  },
+  {
+    "id": 3,
+    "nombre": "Kevin",
+    "email": "kevin@ecoruta.hn",
+    "password": "kevin123",
+    "isAdmin": false,
+    "favoritos": []
+  }
+]
