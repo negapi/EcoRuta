@@ -29,6 +29,7 @@ export class CatalogoComponent {
   newDuracion = signal('');
   newTipo = signal('Senderismo');
   newDescripcion = signal('');
+  newImagen = signal('');
 
   rutasFiltradas = computed(() => {
     let rutas = this.ecoService.getFilteredRutas({
@@ -59,11 +60,12 @@ export class CatalogoComponent {
       duracion: this.newDuracion(),
       tipo: this.newTipo(),
       popularidad: 50,
-      imagen: `https://placehold.co/600x400/1B4332/B7E4C7?text=${encodeURIComponent(this.newNombre())}`,
+      imagen: this.newImagen() || `https://placehold.co/600x400/1B4332/B7E4C7?text=${encodeURIComponent(this.newNombre())}`,
       descripcion: this.newDescripcion()
     });
     this.showAddModal.set(false);
     this.newNombre.set(''); this.newUbicacion.set('');
     this.newDuracion.set(''); this.newDescripcion.set('');
+    this.newImagen.set('');
   }
 }

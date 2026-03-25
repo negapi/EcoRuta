@@ -112,6 +112,8 @@
           <input type="text" [ngModel]="newDuracion()" (ngModelChange)="newDuracion.set($event)" placeholder="Ej: 3 horas" />
         </div>
       </div>
+      <label>URL de imagen</label>
+       <input type="text" [ngModel]="newImagen()" (ngModelChange)="newImagen.set($event)" placeholder="https://ejemplo.com/imagen.jpg" />
       <label>Descripción</label>
       <textarea [ngModel]="newDescripcion()" (ngModelChange)="newDescripcion.set($event)" placeholder="Breve descripción de la ruta..."></textarea>
       <button class="btn-submit" (click)="submitAddRuta()">Guardar Ruta</button>
