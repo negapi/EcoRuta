@@ -6,7 +6,7 @@
 
     @if (auth.isLoggedIn()) {
       <span class="nav-user">
-        {{ auth.isAdmin() ? '⚙️' : '👤' }} {{ auth.currentUser()?.nombre }}
+         {{ auth.currentUser()?.nombre }}
       </span>
       <button class="nav-btn btn-logout" (click)="logout()">Salir</button>
     } @else {
