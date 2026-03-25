@@ -518,12 +518,6 @@ main.eco-main {
   font-weight: 600;
 }
 
-@media (max-width: 768px) {
-  .eco-navbar { padding: 0 1rem; }
-  main.eco-main { padding: 1.5rem 1rem; }
-}
-
-
 .nav-user {
   font-size: 0.82rem;
   color: rgba(255,255,255,0.85);
