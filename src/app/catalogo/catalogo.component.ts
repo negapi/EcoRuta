@@ -20,7 +20,7 @@ export class CatalogoComponent {
   filtroTipo = signal('');
   soloFavoritos = signal(false);
 
-  
+    
   showAddModal = signal(false);
   newNombre = signal('');
   newUbicacion = signal('');
