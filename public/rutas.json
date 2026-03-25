@@ -2,7 +2,7 @@
   {
     "id": 1,
     "nombre": "Sendero La Tigra",
-    "ubicación": "Parque Nacional La Tigra, Francisco Morazán",
+    "ubicacion": "Parque Nacional La Tigra, Francisco Morazán",
     "dificultad": "Media",
     "precio": 150,
     "duracion": "4 horas",
@@ -14,7 +14,7 @@
   {
     "id": 2,
     "nombre": "Cascada Pulhapanzak",
-    "ubicación": "Cortés",
+    "ubicacion": "Cortés",
     "dificultad": "Baja",
     "precio": 100,
     "duracion": "2 horas",
