@@ -83,4 +83,13 @@ export class EcoService {
       return matchNombre && matchDificultad && matchPrecio && matchTipo;
     });
   }
+  addRuta(ruta: Omit<Ruta, 'id'>) {
+    const current = this._rutas();
+    const newId = current.length > 0 ? Math.max(...current.map(r => r.id)) + 1 : 1;
+    this._rutas.set([...current, { ...ruta, id: newId }]);
+  }
+
+  deleteRuta(id: number) {
+    this._rutas.set(this._rutas().filter(r => r.id !== id));
+  }
 }
